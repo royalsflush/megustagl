@@ -1,0 +1,19 @@
+//Because github seems to like readmes, a lot
+
+That's an assignment for a CG course, I have to
+render something using a depth buffer (without OpenGL), 
+but I decided to push it a little further and
+implement lots of stuff.
+
+What do I have to do:
+ - Render a cube, using a light source and materials
+(really, it's that simple)
+
+Yellow-brick road for that:
+ - glutWrapper, so I can use the window and keyboard
+and implement my own display and reshape (DONE)
+ - Copy my vector library from the raytracing repo
+ - Implement display lists and vertex functions, test
+them by printing on the screen
+
+(To be continued)
