@@ -1,6 +1,8 @@
 #ifndef MGGL_TRANSFORMS
 #define MGGL_TRANSFORMS
 
+#include "matrix.h"
+
 //Matrix setter
 enum mggl_matrixModeEnum {
 	MGGL_PROJECTION,
@@ -17,6 +19,10 @@ void mggl_frustum(float left, float right, float bottom,
 		float top, float zNear, float zFar);
 void mggl_viewport(int bottom, int left, int width, int height);
 void mggl_perspective(float fovy, float aspect, float znear, float zfar);
+
+//Internal getters
 Vector& mggl_getEyePos();
+Matrix<float>& mggl_getModelViewMatrix();
+Matrix<float>& mggl_getInverseMVMatrix();
 
 #endif //MGGL_TRANSFORMS

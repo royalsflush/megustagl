@@ -13,6 +13,7 @@
 
 static Matrix<float> projection;
 static Matrix<float> modelview;
+static Matrix<float> invMV;
 static Matrix<float>* currMatrix;
 
 static Vector eyePos;
@@ -70,6 +71,18 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 	Matrix<float> tmp = matR*matT;
 	tmp.t();
 
+	for (int i=0; i<4; i++) {
+		for (int j=0; j<4; j++)
+			printf("%f ", tmp[i][j]);
+		printf("\n");
+	}
+
+	invMV.set(4,4,
+		0.707, -0.707,  0.000,  0.000,
+		-0.348, -0.348,  0.870,  0.000,
+		 0.615,  0.615,  0.492,  0.000,
+		 1.500,  1.500,  1.200,  1.000);
+
 	glLoadIdentity();
 	glMultMatrixf(tmp);
 }
@@ -116,4 +129,12 @@ void mggl_viewport(int bottom, int left, int width, int height) {
 
 Vector& mggl_getEyePos() {
 	return eyePos;
+}
+
+Matrix<float>& mggl_getModelViewMatrix() {
+	return modelview;  
+}
+
+Matrix<float>& mggl_getInverseMVMatrix() {
+	return invMV;
 }
