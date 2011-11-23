@@ -16,6 +16,12 @@
 //All vertex handlers are in this file
 #include "mggl_primitives.h"
 
+//Light operations
+#include "mggl_light.h"
+
+//Material struct
+#include "mggl_material.h"
+
 /*
 //Simplified vertex
 void mggl_triangle(Vector& v1, Vector& v2, Vector& v3);

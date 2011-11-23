@@ -4,7 +4,8 @@ LIBS = -lm
 OUT = megusta
 
 SRCS = main.cpp mggl_glutWrapper.cpp mggl_transforms.cpp \
-	matrix.cpp vector.cpp mggl_primitives.cpp
+	matrix.cpp vector.cpp mggl_primitives.cpp mggl_vertexOps.cpp \
+	mggl_light.cpp mggl_material.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifeq ($(shell uname), Darwin)
@@ -48,6 +49,7 @@ main.o: /usr/include/libkern/_OSByteOrder.h
 main.o: /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h
 main.o: /usr/include/machine/types.h /usr/include/i386/types.h meGustaGL.h
 main.o: vector.h mggl_glutWrapper.h mggl_transforms.h mggl_primitives.h
+main.o: mggl_light.h
 mggl_glutWrapper.o: /usr/include/stdlib.h /usr/include/Availability.h
 mggl_glutWrapper.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
 mggl_glutWrapper.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
@@ -80,4 +82,6 @@ vector.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 vector.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
 vector.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
 vector.o: /usr/include/math.h /usr/include/architecture/i386/math.h vector.h
-mggl_primitives.o: mggl_primitives.h
+mggl_primitives.o: vector.h mggl_vertexOps.h mggl_primitives.h
+mggl_vertexOps.o: vector.h mggl_vertexOps.h
+mggl_material.o: vector.h mggl_material.h

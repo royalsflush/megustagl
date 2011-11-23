@@ -9,6 +9,7 @@ class Vector {
 	Vector(double px=0.0, double py=0.0, double pz=0.0,
 		double pw=1.0);
 	Vector(const Vector& a);
+	Vector(const float* v);
 
 	Vector& operator=(const Vector& a);
 	Vector& operator+=(const Vector& a);
@@ -22,7 +23,7 @@ class Vector {
 
 	double length();
 	void normalize();
-	void print();
+	void print() const;
 	Vector cross(const Vector& a);
 };
 

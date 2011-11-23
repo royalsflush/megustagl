@@ -17,5 +17,6 @@ void mggl_frustum(float left, float right, float bottom,
 		float top, float zNear, float zFar);
 void mggl_viewport(int bottom, int left, int width, int height);
 void mggl_perspective(float fovy, float aspect, float znear, float zfar);
+Vector& mggl_getEyePos();
 
 #endif //MGGL_TRANSFORMS

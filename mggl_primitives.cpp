@@ -6,17 +6,17 @@
 #endif
 
 #include "vector.h"
+#include "mggl_vertexOps.h"
 #include "mggl_primitives.h"
 
 //Triangle that uses plane normal ((v1-v2)X(v3-v2))
 void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
-	Vector n = (v1-v2).cross(v3-v2);
+	Vector n = (v1-v3).cross(v2-v3);
 
 	glBegin(GL_TRIANGLES);
-		glNormal3f(n.x, n.y, n.z);
-		glVertex3f(v1.x, v1.y, v1.z);
-		glVertex3f(v2.x, v2.y, v2.z);
-		glVertex3f(v3.x, v3.y, v3.z);
+		mggl_processVertex(v1,n);
+		mggl_processVertex(v2,n);
+		mggl_processVertex(v3,n);
 	glEnd();
 }
 

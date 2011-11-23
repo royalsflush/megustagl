@@ -15,6 +15,7 @@ using namespace std;
 #define WIN_W 1024
 #define WIN_H 768
 
+/*
 typedef struct {
 	float ambiente[4]; 
 	float diffuse[4]; 
@@ -22,18 +23,26 @@ typedef struct {
 	float shininess[1]; 
 } Material;
 Material brass={{0.33f, 0.22f, 0.03f, 1}, {0.78f, 0.57f, 0.11f, 1}, {0.99f, 0.91f, 0.81f, 1}, {27.8f}};
+*/
 
-void setMaterial(Material* p) {
+void setMaterial() {
+	/*
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, p->ambiente);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, p->diffuse);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, p->specular);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, p->shininess);
+	*/
+	
+	mggl_getMaterial()->ambient = Vector(0.33, 0.22, 0.03, 1.0);
+	mggl_getMaterial()->diffuse = Vector(0.78, 0.57, 0.11, 1.0);
+	mggl_getMaterial()->specular = Vector(0.99, 0.91, 0.81, 1.0);
+	mggl_getMaterial()->shininess = 27.8; 
 }
 
 void draw() {	
 	glClearColor(0.4f,0.4f,0.4f,1);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-	setMaterial(&brass);
+	setMaterial();
 
 //	glutSolidCube(1);	
 	mggl_solidCube(1);
@@ -65,6 +74,8 @@ void resizeHandler(int nWidth, int nHeight) {
 
 void initLight() {
 	float position[]={ 0.5f,2.f,0.f,1.f};   float low[]={0.2f,0.2f,0.2f,1};   float white[]={1,1,1,1};
+
+/*
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glLightfv(GL_LIGHT0, GL_AMBIENT, low);
@@ -73,6 +84,16 @@ void initLight() {
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	*/	
+
+	mggl_matrixMode(MGGL_MODELVIEW);
+	mggl_loadIdentity(); 
+
+	mggl_getLight(0)->on=true;
+	mggl_getLight(0)->ambient=Vector(low);
+	mggl_getLight(0)->diffuse=Vector(white);
+	mggl_getLight(0)->specular=Vector(white);
+	mggl_getLight(0)->position=position;
 }
 
 int main(int argc, char ** argv) {

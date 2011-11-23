@@ -6,6 +6,8 @@
 	#include <glut.h>
 #endif
 
+#include "mggl_light.h"
+
 //Initialization functions
 void mggl_initLib(int argc, char ** argv) {
 	glutInit(&argc,argv);
@@ -13,6 +15,9 @@ void mggl_initLib(int argc, char ** argv) {
 	//We're only using opengl to paint pixels
 	//so won't need anything else
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_RGB);
+
+	//Lights start off
+	mggl_lightsOff();	
 }
 
 void mggl_createWindow(int winW, int winH,

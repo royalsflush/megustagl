@@ -15,6 +15,8 @@ static Matrix<float> projection;
 static Matrix<float> modelview;
 static Matrix<float>* currMatrix;
 
+static Vector eyePos;
+
 const double pi = acos(-1.0); 
 
 //Utility functions
@@ -42,6 +44,8 @@ void mggl_loadIdentity() {
 void mggl_lookAt(const Vector& eye, const Vector& center, 
 		const Vector& up) {
 	Matrix<float> matR, matT;
+	eyePos=eye;
+
 	Vector ze = eye-center;	ze.w=0;
 	Vector xe = ze.cross(up); xe.w=0;
 	Vector ye = xe.cross(ze); ye.w=0;
@@ -84,6 +88,7 @@ void mggl_frustum(float left, float right, float bottom,
 
 }
 
+//Ok!
 void mggl_perspective(float fovy, float aspect, float znear, float zfar) {
 	Matrix<float> matP;
 
@@ -101,16 +106,14 @@ void mggl_perspective(float fovy, float aspect, float znear, float zfar) {
 	Matrix<float> tmp = matP;
 	tmp.t();
 
-	for (int i=0; i<4; i++) {
-		for (int j=0; j<4; j++)
-			printf("%f ", tmp[i][j]);
-		printf("\n");
-	}
-
 	glLoadIdentity();
 	glMultMatrixf(tmp);
 }
 
 void mggl_viewport(int bottom, int left, int width, int height) {
 
+}
+
+Vector& mggl_getEyePos() {
+	return eyePos;
 }

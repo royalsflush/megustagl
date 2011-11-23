@@ -8,6 +8,8 @@ Vector::Vector(double px, double py, double pz,
 
 Vector::Vector(const Vector& a) : x(a.x), y(a.y), z(a.z), w(a.w) { }
 
+Vector::Vector(const float* v) : x(v[0]), y(v[1]), z(v[2]), w(v[3]) { }
+
 Vector& Vector::operator=(const Vector& a) {
 	this->x=a.x;
 	this->y=a.y;
@@ -109,7 +111,7 @@ void Vector::normalize() {
 	this->w/=l;
 }
 
-void Vector::print() {
+void Vector::print() const {
 	printf("(%lf, %lf, %lf, %lf)\n", this->x,this->y,
 		this->z,this->w);
 }
