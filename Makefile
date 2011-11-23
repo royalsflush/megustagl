@@ -4,7 +4,7 @@ LIBS = -lm
 OUT = megusta
 
 SRCS = main.cpp mggl_glutWrapper.cpp mggl_transforms.cpp \
-	matrix.cpp vector.cpp
+	matrix.cpp vector.cpp mggl_primitives.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifeq ($(shell uname), Darwin)
@@ -47,7 +47,7 @@ main.o: /usr/include/i386/endian.h /usr/include/sys/_endian.h
 main.o: /usr/include/libkern/_OSByteOrder.h
 main.o: /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h
 main.o: /usr/include/machine/types.h /usr/include/i386/types.h meGustaGL.h
-main.o: mggl_glutWrapper.h mggl_transforms.h
+main.o: vector.h mggl_glutWrapper.h mggl_transforms.h mggl_primitives.h
 mggl_glutWrapper.o: /usr/include/stdlib.h /usr/include/Availability.h
 mggl_glutWrapper.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
 mggl_glutWrapper.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
@@ -63,8 +63,9 @@ mggl_glutWrapper.o: /usr/include/libkern/_OSByteOrder.h
 mggl_glutWrapper.o: /usr/include/libkern/i386/_OSByteOrder.h
 mggl_glutWrapper.o: /usr/include/alloca.h /usr/include/machine/types.h
 mggl_glutWrapper.o: /usr/include/i386/types.h
-mggl_transforms.o: matrix.h /usr/include/stdarg.h /usr/include/assert.h
-mggl_transforms.o: /usr/include/sys/cdefs.h /usr/include/stdio.h
+mggl_transforms.o: /usr/include/math.h /usr/include/architecture/i386/math.h
+mggl_transforms.o: /usr/include/sys/cdefs.h matrix.h /usr/include/stdarg.h
+mggl_transforms.o: /usr/include/assert.h /usr/include/stdio.h
 mggl_transforms.o: /usr/include/_types.h /usr/include/sys/_types.h
 mggl_transforms.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
 mggl_transforms.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
@@ -79,3 +80,4 @@ vector.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 vector.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
 vector.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
 vector.o: /usr/include/math.h /usr/include/architecture/i386/math.h vector.h
+mggl_primitives.o: mggl_primitives.h

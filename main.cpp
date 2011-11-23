@@ -34,7 +34,9 @@ void draw() {
 	glClearColor(0.4f,0.4f,0.4f,1);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	setMaterial(&brass);
-	glutSolidCube(1);
+
+//	glutSolidCube(1);	
+	mggl_solidCube(1);
 	glFlush();
 }
 
@@ -53,19 +55,6 @@ void resizeHandler(int nWidth, int nHeight) {
 	mggl_matrixMode(MGGL_PROJECTION);
 	mggl_loadIdentity();
 	mggl_perspective(45, 4./3, 0.5, 10);
-/*
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(45,4./3,0.5,10);
-
-	float tmp[16];
-	glGetFloatv(GL_PROJECTION_MATRIX, tmp);
-
-	for (int i=0; i<4; i++) {
-		for (int j=0; j<4; j++)
-			printf("%f ", tmp[4*i+j]);
-		printf("\n");
-	} */
 
 	mggl_matrixMode(MGGL_MODELVIEW);
 	mggl_loadIdentity();

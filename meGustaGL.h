@@ -13,6 +13,9 @@
 // are in this file
 #include "mggl_transforms.h"
 
+//All vertex handlers are in this file
+#include "mggl_primitives.h"
+
 /*
 //Simplified vertex
 void mggl_triangle(Vector& v1, Vector& v2, Vector& v3);
