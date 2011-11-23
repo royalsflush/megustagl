@@ -5,7 +5,7 @@ OUT = megusta
 
 SRCS = main.cpp mggl_glutWrapper.cpp mggl_transforms.cpp \
 	matrix.cpp vector.cpp mggl_primitives.cpp mggl_vertexOps.cpp \
-	mggl_light.cpp mggl_material.cpp
+	mggl_light.cpp mggl_material.cpp mggl_fragOps.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifeq ($(shell uname), Darwin)

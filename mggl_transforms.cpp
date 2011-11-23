@@ -47,7 +47,7 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 	Matrix<float> matR, matT;
 	eyePos=eye;
 
-	Vector ze = eye-center;	ze.w=0;
+	Vector ze = center-eye;	ze.w=0;
 	Vector xe = ze.cross(up); xe.w=0;
 	Vector ye = xe.cross(ze); ye.w=0;
 	
@@ -56,10 +56,10 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 	ze.normalize();
 
 	matR.set(4,4,
-		xe.x, xe.y, xe.z, 0.0f,
-		ye.x, ye.y, ye.z, 0.0f,
-		ze.x, ze.y, ze.z, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f); 
+		 xe.x,  xe.y,  xe.z, 0.0f,
+		 ye.x,  ye.y,  ye.z, 0.0f,
+		-ze.x, -ze.y, -ze.z, 0.0f,
+	 	 0.0f,  0.0f,  0.0f, 1.0f); 
 
 	matT.set(4,4,
 		1.0f, 0.0f, 0.0f, -eye.x,
@@ -77,11 +77,12 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 		printf("\n");
 	}
 
+
 	invMV.set(4,4,
-		0.707, -0.707,  0.000,  0.000,
-		-0.348, -0.348,  0.870,  0.000,
-		 0.615,  0.615,  0.492,  0.000,
-		 1.500,  1.500,  1.200,  1.000);
+		-0.707107,  0.707107,  0.000000,  0.000000,
+		-0.348156, -0.348156,  0.870389,  0.000000,
+		 0.615458,  0.615458,  0.492366,  0.000000,
+		 1.500001,  1.500001,  1.200000,  1.000000);
 
 	glLoadIdentity();
 	glMultMatrixf(tmp);
@@ -137,4 +138,19 @@ Matrix<float>& mggl_getModelViewMatrix() {
 
 Matrix<float>& mggl_getInverseMVMatrix() {
 	return invMV;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

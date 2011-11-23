@@ -5,17 +5,18 @@
 #include "mggl_light.h"
 #include "mggl_material.h"
 #include "mggl_transforms.h"
+#include "mggl_vertexOps.h"
 
 #define VLIGHTS_TAM 8
+#define max(a,b) ((a>b)?a:b)
 
 static Light lightsVec[VLIGHTS_TAM];
 
 Vector mggl_calcColor(const Vector& v, const Vector& n) {
-	Vector eye = mggl_getEyePos();
 	Vector color(0.0, 0.0, 0.0, 0.0);
 
 	Vector ldif, lspec, lamb, lpos;
-	Vector mdif, mspec, mamb;
+	Vector mdif, mspec, mamb, tmppos;
 
 	mdif = mggl_getMaterial()->diffuse;
 	mspec = mggl_getMaterial()->specular;
@@ -30,18 +31,20 @@ Vector mggl_calcColor(const Vector& v, const Vector& n) {
 		lpos = lightsVec[i].position;
 		lspec = lightsVec[i].specular;		
 
-		Vector l = lpos - v;
+		lpos = mggl_modelViewTransform(lpos);
+
+		Vector l = lpos-v;
 		l.normalize();
 
-		Vector r = (n*(l*n))*2.0-l;
-		r.normalize();
-
-		Vector obs = eye-v;
+		Vector obs = v*(-1);
 		obs.normalize();		
 
-		color.x=(lamb.x)*(mamb.x);
-		color.y=(lamb.y)*(mamb.y);
-		color.z=(lamb.z)*(mamb.z);
+		Vector h = l+obs;
+		h.normalize();
+
+		color.x+=(lamb.x)*(mamb.x);
+		color.y+=(lamb.y)*(mamb.y);
+		color.z+=(lamb.z)*(mamb.z);
 
 		if (l*n>0) {
 			//Diffuse
@@ -50,10 +53,10 @@ Vector mggl_calcColor(const Vector& v, const Vector& n) {
 			color.z+=(ldif.z)*(l*n)*(mdif.z);
 
 			//Specular
-			double robs = pow(r*obs, shi);
-			color.x+=(lspec.x)*(mspec.x)*robs;
-			color.y+=(lspec.y)*(mspec.y)*robs;
-			color.z+=(lspec.z)*(mspec.z)*robs;
+			double coef = pow(max(h*n,0), shi);
+			color.x+=(lspec.x)*(mspec.x)*coef;
+			color.y+=(lspec.y)*(mspec.y)*coef;
+			color.z+=(lspec.z)*(mspec.z)*coef;
 		}		
 	}
 

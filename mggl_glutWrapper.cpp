@@ -7,6 +7,7 @@
 #endif
 
 #include "mggl_light.h"
+#include "mggl_fragOps.h"
 
 //Initialization functions
 void mggl_initLib(int argc, char ** argv) {
@@ -25,6 +26,7 @@ void mggl_createWindow(int winW, int winH,
 	
 	glutInitWindowSize(winW,winH);
 	glutCreateWindow(title);
+	mggl_initBuffers(winW, winH);
 }
 
 //Execution loop
@@ -40,7 +42,9 @@ void mggl_getKeyboardFunc(void (*func)(unsigned char,
 
 //Getters for my lib
 void mggl_getDrawFunc(void (*func)()) {
-	glutDisplayFunc(func);	
+	//(*func)();
+	//glutDisplayFunc(mggl_drawBuffers());	
+	glutDisplayFunc(func);
 }
 
 void mggl_resizeFunc(void (*func)(int, int)) {

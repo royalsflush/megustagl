@@ -31,11 +31,11 @@ void setMaterial(vMaterial* p) {
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, p->specular);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, p->shininess);
 	
-/*	
+	
 	mggl_getMaterial()->ambient = Vector(0.33, 0.22, 0.03, 1.0);
 	mggl_getMaterial()->diffuse = Vector(0.78, 0.57, 0.11, 1.0);
 	mggl_getMaterial()->specular = Vector(0.99, 0.91, 0.81, 1.0);
-	mggl_getMaterial()->shininess = 27.8; */
+	mggl_getMaterial()->shininess = 27.8;
 }
 
 void draw() {	
@@ -83,7 +83,6 @@ void initLight() {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
-/*
 	mggl_matrixMode(MGGL_MODELVIEW);
 	mggl_loadIdentity(); 
 
@@ -91,7 +90,7 @@ void initLight() {
 	mggl_getLight(0)->ambient=Vector(low);
 	mggl_getLight(0)->diffuse=Vector(white);
 	mggl_getLight(0)->specular=Vector(white);
-	mggl_getLight(0)->position=Vector(position); */
+	mggl_getLight(0)->position=Vector(position); 	
 }
 
 int main(int argc, char ** argv) {
