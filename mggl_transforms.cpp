@@ -1,4 +1,5 @@
 #include <math.h>
+#include <assert.h>
 
 #include "matrix.h"
 #include "vector.h"
@@ -71,18 +72,19 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 	Matrix<float> tmp = matR*matT;
 	tmp.t();
 
-	for (int i=0; i<4; i++) {
-		for (int j=0; j<4; j++)
-			printf("%f ", tmp[i][j]);
-		printf("\n");
-	}
-
-
 	invMV.set(4,4,
 		-0.707107,  0.707107,  0.000000,  0.000000,
 		-0.348156, -0.348156,  0.870389,  0.000000,
 		 0.615458,  0.615458,  0.492366,  0.000000,
 		 1.500001,  1.500001,  1.200000,  1.000000);
+	invMV.t();
+	Matrix<float> ast = (*currMatrix)*invMV;
+
+	for (int i=0; i<4; i++) {
+		for (int j=0; j<4; j++)
+			printf("%f ", ast[i][j]);
+		printf("\n");
+	}
 
 	glLoadIdentity();
 	glMultMatrixf(tmp);
