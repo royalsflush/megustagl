@@ -42,7 +42,7 @@ Vector Vector::operator+(const Vector& a) {
 	return res;
 }
 
-Vector Vector::operator-(const Vector& a) {
+Vector Vector::operator-(const Vector& a) const { 
 	Vector res(*this);
 	res-=a;
 

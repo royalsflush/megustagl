@@ -1,44 +1,19 @@
 #ifndef ME_GUSTA_GL_H
 #define ME_GUSTA_GL_H
 
-class Vector;
+//All the coords are given using this
+//lib
+#include "vector.h"
 
 //Using GLUT functions to create
 // a simple window
-#include "glutWrapper.h"
+#include "mggl_glutWrapper.h"
+
+//All camera and space transformations
+// are in this file
+#include "mggl_transforms.h"
 
 /*
-//Initialization functions
-bool mggl_initLib();
-void mggl_createWindow(int winW, int winH,
-	const char* title);
-
-//Execution loop
-void mggl_run();
-
-//Getter for GLUT
-void mggl_getKeyboardFunc(void (*func)(unsigned char,
-			int,int));	
-
-//Getters for my lib
-void mggl_getDrawFunc(void (*func)());
-void mggl_resizeFunc(void (*func)(int, int));
-
-//Matrix setter
-enum mggl_matrixModeEnum {
-	MGGL_PROJECTION,
-	MGGL_MODELVIEW
-};
-
-void mggl_matrixMode(mggl_matrixModeEnum matType);
-void mggl_loadIdentity();
-
-//Camera setters
-void mggl_lookAt(Vector& eye, Vector& center, Vector& up);
-void mggl_frustum(float left, float right, float bottom,
-		float top, float zNear, float zFar);
-void mggl_viewport(int bottom, int left, int width, int height);
-
 //Simplified vertex
 void mggl_triangle(Vector& v1, Vector& v2, Vector& v3);
 

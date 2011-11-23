@@ -11,9 +11,11 @@ void mggl_matrixMode(mggl_matrixModeEnum matType);
 void mggl_loadIdentity();
 
 //Camera setters
-void mggl_lookAt(Vector& eye, Vector& center, Vector& up);
+void mggl_lookAt(const Vector& eye, const Vector& center, 
+		const Vector& up);
 void mggl_frustum(float left, float right, float bottom,
 		float top, float zNear, float zFar);
 void mggl_viewport(int bottom, int left, int width, int height);
+void mggl_perspective(float fovy, float aspect, float znear, float zfar);
 
 #endif //MGGL_TRANSFORMS
