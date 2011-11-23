@@ -80,8 +80,8 @@ void initLight() {
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, white);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, white);
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
 	
 	mggl_matrixMode(MGGL_MODELVIEW);
 	mggl_loadIdentity(); 

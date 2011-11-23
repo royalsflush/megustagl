@@ -34,12 +34,11 @@ Vector mggl_modelViewTransform(const Vector& v) {
 
 Vector mggl_normalToEyeTransform(const Vector& v) {
 	Matrix<float> invMv = mggl_getInverseMVMatrix();
-	invMv.t(); Vector eyeN;
-	
-	eyeN.x = invMv[0][0]*(v.x)+invMv[0][1]*(v.y)+invMv[0][2]*(v.z)+invMv[0][3]*(v.w);
-	eyeN.y = invMv[1][0]*(v.x)+invMv[1][1]*(v.y)+invMv[1][2]*(v.z)+invMv[1][3]*(v.w);
-	eyeN.z = invMv[2][0]*(v.x)+invMv[2][1]*(v.y)+invMv[2][2]*(v.z)+invMv[2][3]*(v.w);
-	eyeN.w = invMv[3][0]*(v.x)+invMv[3][1]*(v.y)+invMv[3][2]*(v.z)+invMv[3][3]*(v.w);
+	invMv.t(); Vector eyeN; eyeN.w = 0;
+
+	eyeN.x = invMv[0][0]*(v.x)+invMv[0][1]*(v.y)+invMv[0][2]*(v.z);
+	eyeN.y = invMv[1][0]*(v.x)+invMv[1][1]*(v.y)+invMv[1][2]*(v.z);
+	eyeN.z = invMv[2][0]*(v.x)+invMv[2][1]*(v.y)+invMv[2][2]*(v.z);
 	eyeN.normalize();
 
 	return eyeN;

@@ -16,7 +16,7 @@ Vector mggl_calcColor(const Vector& v, const Vector& n) {
 	Vector color(0.0, 0.0, 0.0, 0.0);
 
 	Vector ldif, lspec, lamb, lpos;
-	Vector mdif, mspec, mamb, tmppos;
+	Vector mdif, mspec, mamb;
 
 	mdif = mggl_getMaterial()->diffuse;
 	mspec = mggl_getMaterial()->specular;
@@ -31,15 +31,13 @@ Vector mggl_calcColor(const Vector& v, const Vector& n) {
 		lpos = lightsVec[i].position;
 		lspec = lightsVec[i].specular;		
 
-		lpos = mggl_modelViewTransform(lpos);
-
-		Vector l = lpos-v;
+		Vector l = lpos-v; l.w=0;
 		l.normalize();
 
-		Vector obs = v*(-1);
+		Vector obs = v*(-1); obs.w=0;
 		obs.normalize();		
 
-		Vector h = l+obs;
+		Vector h = l+obs; h.w=0;
 		h.normalize();
 
 		color.x+=(lamb.x)*(mamb.x);
