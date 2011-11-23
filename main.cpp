@@ -93,7 +93,7 @@ void initLight() {
 	mggl_getLight(0)->ambient=Vector(low);
 	mggl_getLight(0)->diffuse=Vector(white);
 	mggl_getLight(0)->specular=Vector(white);
-	mggl_getLight(0)->position=position;
+	mggl_getLight(0)->position=Vector(position);
 }
 
 int main(int argc, char ** argv) {

@@ -37,7 +37,7 @@ Vector& Vector::operator-=(const Vector& a) {
 	return *this;
 }
 
-Vector Vector::operator+(const Vector& a) {
+Vector Vector::operator+(const Vector& a) const {
 	Vector res(*this);
 	res+=a;
 
@@ -60,14 +60,14 @@ Vector& Vector::operator*=(const double a) {
 	return *this;
 }
 
-Vector Vector::operator*(const double a) {
+Vector Vector::operator*(const double a) const {
 	Vector res(*this);
 	res*=a;
 
 	return res;
 }
 
-double Vector::operator*(const Vector& a) {
+double Vector::operator*(const Vector& a) const {
 	double dot=0.0;	
 
 	dot+=this->x*a.x;

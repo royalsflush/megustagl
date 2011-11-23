@@ -32,13 +32,12 @@ Vector mggl_calcColor(const Vector& v, const Vector& n) {
 
 		Vector l = lpos - v;
 		l.normalize();
-		n.print();
 
-//		Vector r = (n*(l*n))*2.0-l;
-//		r.normalize();
+		Vector r = (n*(l*n))*2.0-l;
+		r.normalize();
 
-//		Vector obs = eye-v;
-//		obs.normalize();		
+		Vector obs = eye-v;
+		obs.normalize();		
 
 		color.x=(lamb.x)*(mamb.x);
 		color.y=(lamb.y)*(mamb.y);
@@ -50,8 +49,11 @@ Vector mggl_calcColor(const Vector& v, const Vector& n) {
 			color.y+=(ldif.y)*(l*n)*(mdif.y);
 			color.z+=(ldif.z)*(l*n)*(mdif.z);
 
-			color.print();			
-			//double robs = pow(r*obs, shi);
+			//Specular
+			double robs = pow(r*obs, shi);
+			color.x+=(lspec.x)*(mspec.x)*robs;
+			color.y+=(lspec.y)*(mspec.y)*robs;
+			color.z+=(lspec.z)*(mspec.z)*robs;
 		}		
 	}
 
