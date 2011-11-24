@@ -43,8 +43,7 @@ void mggl_getKeyboardFunc(void (*func)(unsigned char,
 //Getters for my lib
 void mggl_getDrawFunc(void (*func)()) {
 	//(*func)();
-	//glutDisplayFunc(mggl_drawBuffers());	
-	glutDisplayFunc(func);
+	glutDisplayFunc(mggl_drawBuffers);
 }
 
 void mggl_resizeFunc(void (*func)(int, int)) {

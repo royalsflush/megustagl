@@ -13,11 +13,14 @@
 #endif
 
 static Matrix<float> projection;
+static Matrix<float> invProj;
 static Matrix<float> modelview;
 static Matrix<float> invMV;
 static Matrix<float>* currMatrix;
+static Matrix<float>* currInv;
 
 static Vector eyePos;
+static Vector viewport;
 
 const double pi = acos(-1.0); 
 
@@ -29,10 +32,12 @@ double toRad(double x) {
 void mggl_matrixMode(mggl_matrixModeEnum matType) {
 	if (matType==MGGL_PROJECTION) {
 		currMatrix = &projection;
+		currInv = &invProj;
 		glMatrixMode(GL_PROJECTION);
 	}
 	else {
 		currMatrix = &modelview;
+		currInv = &invMV;
 		glMatrixMode(GL_MODELVIEW);
 	}
 }
@@ -70,21 +75,8 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 
 	*currMatrix = matR*matT;
 	Matrix<float> tmp = matR*matT;
+	*currInv = tmp; currInv->invert();
 	tmp.t();
-
-	invMV.set(4,4,
-		-0.707107,  0.707107,  0.000000,  0.000000,
-		-0.348156, -0.348156,  0.870389,  0.000000,
-		 0.615458,  0.615458,  0.492366,  0.000000,
-		 1.500001,  1.500001,  1.200000,  1.000000);
-	invMV.t();
-	Matrix<float> ast = (*currMatrix)*invMV;
-
-	for (int i=0; i<4; i++) {
-		for (int j=0; j<4; j++)
-			printf("%f ", ast[i][j]);
-		printf("\n");
-	}
 
 	glLoadIdentity();
 	glMultMatrixf(tmp);
@@ -126,8 +118,8 @@ void mggl_perspective(float fovy, float aspect, float znear, float zfar) {
 	glMultMatrixf(tmp);
 }
 
-void mggl_viewport(int bottom, int left, int width, int height) {
-
+void mggl_viewport(int left, int bottom, int width, int height) {
+	viewport = Vector(left, bottom, width, height);
 }
 
 Vector& mggl_getEyePos() {
@@ -140,19 +132,12 @@ Matrix<float>& mggl_getModelViewMatrix() {
 
 Matrix<float>& mggl_getInverseMVMatrix() {
 	return invMV;
+}
 
+Matrix<float>& mggl_getProjectionMatrix() {
+	return projection;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Vector& mggl_getViewport() {
+	return viewport;
 }

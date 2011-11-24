@@ -5,20 +5,20 @@
 using namespace std;
 
 	template <>
-void Matrix<float>::set(int r, int c, ...)
+void Matrix<float>::set(int pr, int pc, ...)
 {
-	if (this->r!=r || this->c!=c) {
+	if (this->r!=pr || this->c!=pc) {
 		delete[] this->mat;
-		this->r=r; this->c=c;	
+		this->r=pr; this->c=pc;	
 		this->mat = new float[r*c];
 	}	
 
 	va_list args;
-	va_start(args, c);
+	va_start(args, pc);
 
-	for (int i=0; i<r; i++) {
-		for (int j=0; j<c; j++)
-			this->mat[i*c+j]= (float) va_arg(args, double);
+	for (int i=0; i<pr; i++) {
+		for (int j=0; j<pc; j++)
+			this->mat[i*pc+j]= (float) va_arg(args, double);
 	}
 
 	va_end(args);
@@ -26,20 +26,20 @@ void Matrix<float>::set(int r, int c, ...)
 
 
 	template <>
-void Matrix<short>::set(int r, int c, ...)
+void Matrix<short>::set(int pr, int pc, ...)
 {
-	if (this->r!=r || this->c!=c) {
+	if (this->r!=pr || this->c!=pc) {
 		delete[] this->mat;
-		this->r=r; this->c=c;	
-		this->mat = new short[r*c];
+		this->r=pr; this->c=pc;	
+		this->mat = new short[pr*pc];
 	}
 
 	va_list args;
-	va_start(args, c);
+	va_start(args, pc);
 
-	for (int i=0; i<r; i++) {
-		for (int j=0; j<c; j++)
-			this->mat[i*c+j]= (short) va_arg(args, int);
+	for (int i=0; i<pr; i++) {
+		for (int j=0; j<pc; j++)
+			this->mat[i*pc+j]= (short) va_arg(args, int);
 	}
 
 	va_end(args);

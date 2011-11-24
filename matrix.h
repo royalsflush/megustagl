@@ -22,11 +22,11 @@ class Matrix {
 	void sparse(); //ok
 	bool isSparse(); //ok
 	void identity(); //ok
-	void set(int r, int c, ...); //check floating points
+	void set(int pr, int pc, ...); //check floating points
 
 	void setFromArray(int pr, int pc, T* vec);
 	void t(); //ok
-	const Matrix invert();
+	const Matrix invert(); //
 	T det(); //not working
 	Matrix LUdecomp();
 
@@ -165,8 +165,8 @@ void Matrix<T>::set(int pr, int pc, ...)
 {
 	if (this->r!=pr || this->c!=pc) {
 		delete[] this->mat;
-		this->r=r; this->c=c;	
-		this->mat = new T[r*c];
+		this->r=pr; this->c=pc;	
+		this->mat = new T[pr*pc];
 	}
 
 	va_list args;
@@ -275,11 +275,66 @@ T Matrix<T>::det()
 	return (this->LUdecomp()).det();
 }
 
+	template<typename T>
+T tabs(T a) {
+	if (a<0) return -a;
+	return a;
+}
+
+	template<typename T>
+T swap(T a, T b) {
+	T c = a;
+	a = b;
+	b = c;
+}
+
 	template <typename T>
 const Matrix<T> Matrix<T>::invert()
 {
-	//Using Gaussian-Jordan elimination, O(n^3)
-	//assert(this->det());
+	//This code is strongly base on the code by MauricioC
+	Matrix<T> cpy(*this);
+	T maxVal=-1; int n = this->r;
+	Matrix<T> inv(n);	
+
+	for (int k=0; k<n; k++) {
+		int pivot;		
+
+		for (int i=k; i<n; i++)
+			if (maxVal<this->getPos(i,k))
+				maxVal=tabs(cpy[i][k]), pivot=i;
+
+		for (int i=0; i<n; i++)
+			swap(cpy[pivot][i], cpy[k][i]);
+		for (int i=0; i<n; i++)
+			swap(inv[pivot][i], inv[k][i]);
+
+		for (int i=k+1; i<n; i++) {
+			T coef = -cpy[i][k]/cpy[k][k];
+
+			for (int j=0; j<n; j++)
+				cpy[i][j]+=coef*cpy[k][j];
+			for (int j=0; j<n; j++)
+				inv[i][j]+=coef*inv[k][j];
+		}
+	}
+
+	 for(int i = n-1; i >= 0; i--) {
+    		for(int j = i-1; j >= 0; j--) {
+      			double coef = -cpy[j][i]/cpy[i][i];
+      			
+			for(int k = j; k < n; k++)
+        			cpy[j][k] += coef * cpy[i][k];
+			for(int k = 0; k < n; k++)
+        			inv[j][k] += coef * inv[i][k];
+    		}
+    		
+		for(int j = 0; j < n; j++) 
+			inv[i][j] /= cpy[i][i];
+    		
+		cpy[i][i] = 1;
+  	}	
+
+	return (*this)=inv;
 }
 
 	template <typename T>

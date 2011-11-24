@@ -10,10 +10,19 @@ What do I have to do:
 (really, it's that simple)
 
 Yellow-brick road for that:
- - glutWrapper, so I can use the window and keyboard
-and implement my own display and reshape (DONE)
- - Copy my vector library from the raytracing repo
- - Implement display lists and vertex functions, test
-them by printing on the screen
+- Projection transform
+- Rasterization
 
-(To be continued)
+What's ready:
+- the wrapper to glut
+- lighting!
+- primitives: triangle and cube
+- Inverse of the matrix
+
+What would look great:
+- vector template! \o/
+- rotations, translations and scaling
+- Put arcball code (aweeeesome!)
+
+What's not tested:
+- Lots of lights

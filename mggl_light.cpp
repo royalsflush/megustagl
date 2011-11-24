@@ -7,7 +7,7 @@
 #include "mggl_transforms.h"
 #include "mggl_vertexOps.h"
 
-#define VLIGHTS_TAM 1
+#define VLIGHTS_TAM 8
 #define max(a,b) ((a>b)?a:b)
 
 static Light lightsVec[VLIGHTS_TAM];
@@ -51,10 +51,10 @@ Vector mggl_calcColor(const Vector& v, const Vector& n) {
 			color.z+=(ldif.z)*(l*n)*(mdif.z);
 
 			//Specular
-		//	double coef = pow(max(h*n,0), shi);
-		//	color.x+=(lspec.x)*(mspec.x)*coef;
-		//	color.y+=(lspec.y)*(mspec.y)*coef;
-		//	color.z+=(lspec.z)*(mspec.z)*coef;
+			double coef = pow(max(h*n,0), shi);
+			color.x+=(lspec.x)*(mspec.x)*coef;
+			color.y+=(lspec.y)*(mspec.y)*coef;
+			color.z+=(lspec.z)*(mspec.z)*coef;
 		}		
 	}
 

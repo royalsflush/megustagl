@@ -48,8 +48,9 @@ main.o: /usr/include/i386/endian.h /usr/include/sys/_endian.h
 main.o: /usr/include/libkern/_OSByteOrder.h
 main.o: /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h
 main.o: /usr/include/machine/types.h /usr/include/i386/types.h meGustaGL.h
-main.o: vector.h mggl_glutWrapper.h mggl_transforms.h mggl_primitives.h
-main.o: mggl_light.h
+main.o: vector.h mggl_glutWrapper.h mggl_transforms.h matrix.h
+main.o: /usr/include/stdarg.h /usr/include/assert.h mggl_primitives.h
+main.o: mggl_light.h mggl_material.h
 mggl_glutWrapper.o: /usr/include/stdlib.h /usr/include/Availability.h
 mggl_glutWrapper.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
 mggl_glutWrapper.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
@@ -64,10 +65,11 @@ mggl_glutWrapper.o: /usr/include/i386/endian.h /usr/include/sys/_endian.h
 mggl_glutWrapper.o: /usr/include/libkern/_OSByteOrder.h
 mggl_glutWrapper.o: /usr/include/libkern/i386/_OSByteOrder.h
 mggl_glutWrapper.o: /usr/include/alloca.h /usr/include/machine/types.h
-mggl_glutWrapper.o: /usr/include/i386/types.h
+mggl_glutWrapper.o: /usr/include/i386/types.h mggl_light.h vector.h
+mggl_glutWrapper.o: mggl_fragOps.h
 mggl_transforms.o: /usr/include/math.h /usr/include/architecture/i386/math.h
-mggl_transforms.o: /usr/include/sys/cdefs.h matrix.h /usr/include/stdarg.h
-mggl_transforms.o: /usr/include/assert.h /usr/include/stdio.h
+mggl_transforms.o: /usr/include/sys/cdefs.h /usr/include/assert.h matrix.h
+mggl_transforms.o: /usr/include/stdarg.h /usr/include/stdio.h
 mggl_transforms.o: /usr/include/_types.h /usr/include/sys/_types.h
 mggl_transforms.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
 mggl_transforms.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
@@ -82,6 +84,23 @@ vector.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
 vector.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
 vector.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
 vector.o: /usr/include/math.h /usr/include/architecture/i386/math.h vector.h
-mggl_primitives.o: vector.h mggl_vertexOps.h mggl_primitives.h
-mggl_vertexOps.o: vector.h mggl_vertexOps.h
+mggl_primitives.o: vector.h mggl_vertexOps.h mggl_fragOps.h mggl_primitives.h
+mggl_vertexOps.o: vector.h mggl_light.h mggl_transforms.h matrix.h
+mggl_vertexOps.o: /usr/include/stdarg.h /usr/include/assert.h
+mggl_vertexOps.o: /usr/include/sys/cdefs.h /usr/include/stdio.h
+mggl_vertexOps.o: /usr/include/_types.h /usr/include/sys/_types.h
+mggl_vertexOps.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+mggl_vertexOps.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+mggl_vertexOps.o: mggl_vertexOps.h
+mggl_light.o: /usr/include/assert.h /usr/include/sys/cdefs.h
+mggl_light.o: /usr/include/math.h /usr/include/architecture/i386/math.h
+mggl_light.o: vector.h mggl_light.h mggl_material.h mggl_transforms.h
+mggl_light.o: matrix.h /usr/include/stdarg.h /usr/include/stdio.h
+mggl_light.o: /usr/include/_types.h /usr/include/sys/_types.h
+mggl_light.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+mggl_light.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
+mggl_light.o: mggl_vertexOps.h
 mggl_material.o: vector.h mggl_material.h
+mggl_fragOps.o: /usr/include/math.h /usr/include/architecture/i386/math.h
+mggl_fragOps.o: /usr/include/sys/cdefs.h /usr/include/assert.h vector.h
+mggl_fragOps.o: mggl_fragOps.h mggl_vertexOps.h

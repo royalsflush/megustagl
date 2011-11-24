@@ -16,8 +16,10 @@ Vector mggl_processVertex(const Vector& v, const Vector& n) {
 	Vector col = mggl_calcColor(eyeV,eyeN);
 	
 	glColor3f(col.x, col.y, col.z);
-	glNormal3f(n.x, n.y, n.z);
+//	glNormal3f(n.x, n.y, n.z);
 	glVertex3f(v.x, v.y,v.z);
+	
+	return col;
 }
 
 Vector mggl_modelViewTransform(const Vector& v) {
@@ -45,8 +47,24 @@ Vector mggl_normalToEyeTransform(const Vector& v) {
 }
 
 Vector mggl_projectionTransform(const Vector& v) {
-//	Vector projV;
-//	Matrix<float> projMat = mggl_getProjectionMatrix();
+	Vector projV;
+	Matrix<float> projMat = mggl_getProjectionMatrix();
 
-	
+	projV.x = projMat[0][0]*(v.x)+projMat[0][1]*(v.y)+projMat[0][2]*(v.z)+projMat[0][3]*(v.w);
+	projV.y = projMat[1][0]*(v.x)+projMat[1][1]*(v.y)+projMat[1][2]*(v.z)+projMat[1][3]*(v.w);
+	projV.z = projMat[2][0]*(v.x)+projMat[2][1]*(v.y)+projMat[2][2]*(v.z)+projMat[2][3]*(v.w);
+	projV.w = projMat[3][0]*(v.x)+projMat[3][1]*(v.y)+projMat[3][2]*(v.z)+projMat[3][3]*(v.w);
+
+	return projV;
+}
+
+Vector mggl_viewportTransform(const Vector& v) {
+	Vector win; win.z=0; win.w=0;
+	Vector vp = mggl_getViewport();
+
+	//Here z is width, w is height
+	win.x=(v.x+1)*(vp.z/2.0)+vp.x;
+	win.y=(v.y+1)*(vp.w/2.0)+vp.y;
+
+	return win;
 }

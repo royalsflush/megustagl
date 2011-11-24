@@ -7,18 +7,34 @@
 
 #include "vector.h"
 #include "mggl_vertexOps.h"
+#include "mggl_fragOps.h"
 #include "mggl_primitives.h"
 
 //Triangle that uses plane normal ((v3-v2)X(v1-v2))
 void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
 	Vector n = (v3-v2).cross(v1-v2);
 	n.w=0; n.normalize();
+	
+	Vector c1,c2,c3;
+	Vector p1,p2,p3;
 
 	glBegin(GL_TRIANGLES);
-		mggl_processVertex(v1,n);
-		mggl_processVertex(v2,n);
-		mggl_processVertex(v3,n);
+		c1=mggl_processVertex(v1,n);
+		c2=mggl_processVertex(v2,n);
+		c3=mggl_processVertex(v3,n);
 	glEnd();
+
+	Vector e1, e2, e3;
+	e1 = mggl_modelViewTransform(v1);
+	e2 = mggl_modelViewTransform(v2);
+	e3 = mggl_modelViewTransform(v3);
+
+	p1 = mggl_projectionTransform(e1);
+	p2 = mggl_projectionTransform(e2);
+	p3 = mggl_projectionTransform(e3);
+
+	rasterTriangle(p1, p2, p3,
+			c1, c2, c3);
 }
 
 //Triangle with given normals

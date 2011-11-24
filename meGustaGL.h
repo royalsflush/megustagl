@@ -22,6 +22,8 @@
 //Material struct
 #include "mggl_material.h"
 
+//Fragments
+#include "mggl_fragOps.h"
 /*
 //Simplified vertex
 void mggl_triangle(Vector& v1, Vector& v2, Vector& v3);

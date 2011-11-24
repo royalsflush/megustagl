@@ -24,5 +24,7 @@ void mggl_perspective(float fovy, float aspect, float znear, float zfar);
 Vector& mggl_getEyePos();
 Matrix<float>& mggl_getModelViewMatrix();
 Matrix<float>& mggl_getInverseMVMatrix();
+Matrix<float>& mggl_getProjectionMatrix();
+Vector& mggl_getViewport();
 
 #endif //MGGL_TRANSFORMS
