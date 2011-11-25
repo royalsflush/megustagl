@@ -172,7 +172,7 @@ void rasterTriangle(Vector& p1, Vector& p2,
 			double z = (v1.z)*(coefs.x)+(v2.z)*(coefs.y)+(v3.z)*(coefs.z);
 
 			if (getDepth(x,y)>z) {
-				Vector col = c1;
+				Vector col = interpolate(coefs,c1,c2,c3);
 				setDepth(x,y,z);
 				setColor(x, y, col);	
 			}
