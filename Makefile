@@ -50,7 +50,7 @@ main.o: /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h
 main.o: /usr/include/machine/types.h /usr/include/i386/types.h meGustaGL.h
 main.o: vector.h mggl_glutWrapper.h mggl_transforms.h matrix.h
 main.o: /usr/include/stdarg.h /usr/include/assert.h mggl_primitives.h
-main.o: mggl_light.h mggl_material.h
+main.o: mggl_light.h mggl_material.h mggl_fragOps.h
 mggl_glutWrapper.o: /usr/include/stdlib.h /usr/include/Availability.h
 mggl_glutWrapper.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
 mggl_glutWrapper.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
@@ -102,5 +102,9 @@ mggl_light.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
 mggl_light.o: mggl_vertexOps.h
 mggl_material.o: vector.h mggl_material.h
 mggl_fragOps.o: /usr/include/math.h /usr/include/architecture/i386/math.h
-mggl_fragOps.o: /usr/include/sys/cdefs.h /usr/include/assert.h vector.h
-mggl_fragOps.o: mggl_fragOps.h mggl_vertexOps.h
+mggl_fragOps.o: /usr/include/sys/cdefs.h /usr/include/assert.h
+mggl_fragOps.o: /usr/include/stdio.h /usr/include/_types.h
+mggl_fragOps.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+mggl_fragOps.o: /usr/include/i386/_types.h /usr/include/secure/_stdio.h
+mggl_fragOps.o: /usr/include/secure/_common.h vector.h mggl_fragOps.h
+mggl_fragOps.o: mggl_vertexOps.h

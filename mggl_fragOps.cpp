@@ -172,18 +172,13 @@ void rasterTriangle(Vector& p1, Vector& p2,
 		
 		for (int x=validX[0]; x<=validX[validX.size()-1]; x++) {
 			Vector coefs = calcCoefs(x,y,v1,v2,v3);
+			double z = (v1.z)*(coefs.x)+(v2.z)*(coefs.y)+(v3.z)*(coefs.z);
 
-		//	if (getDepth(x,y)<z) {
-		//		Vector col = c1;
-			//	setDepth(x,y,z);
-		//		setColor(x, y, col);	
-		//	}
+			if (getDepth(x,y)>z) {
+				Vector col = c1;
+				setDepth(x,y,z);
+				setColor(x, y, col);	
+			}
 		}
 	}
-
-//	for (int i=minY; i<=maxY; i++) {
-	//	for (int j=0; j<500; j++)
-	//		colorBuffer[j*height+i].print();
-	//	printf("\n");
-//	}
 }
