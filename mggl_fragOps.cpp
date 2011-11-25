@@ -60,18 +60,22 @@ void mggl_initBuffers(int wid, int hei) {
 
 
 //Set color to pixel x,y
-void setColor(int x, int y, Vector& color) {
+void mggl_setColor(int x, int y, Vector& color) {
 	colorBuffer[x*height+y]=color;
 }
 
 //Get depth of pixel x,y
-float getDepth(int x, int y) {
+float mggl_getDepth(int x, int y) {
 	return depthBuffer[x*height+y];
 }
 
 //Set depth of pixel x,y
-void setDepth(int x, int y, float z) {
+void mggl_setDepth(int x, int y, float z) {
 	depthBuffer[x*height+y]=z;
+}
+
+void mggl_setClearColor(const Vector& c) {
+	clearColor=c;
 }
 
 //build triangle
@@ -142,7 +146,7 @@ Vector interpolate(const Vector& coefs, const Vector& c1, const Vector& c2,
 	return col;
 }
 
-void rasterTriangle(Vector& p1, Vector& p2,
+void mggl_rasterTriangle(Vector& p1, Vector& p2,
 		Vector& p3, const Vector& c1,
 		const Vector& c2, const Vector& c3) {
 
@@ -171,10 +175,10 @@ void rasterTriangle(Vector& p1, Vector& p2,
 			Vector coefs = calcCoefs(x,y,v1,v2,v3);
 			double z = (v1.z)*(coefs.x)+(v2.z)*(coefs.y)+(v3.z)*(coefs.z);
 
-			if (getDepth(x,y)>z) {
+			if (mggl_getDepth(x,y)>z) {
 				Vector col = interpolate(coefs,c1,c2,c3);
-				setDepth(x,y,z);
-				setColor(x, y, col);	
+				mggl_setDepth(x,y,z);
+				mggl_setColor(x, y, col);	
 			}
 		}
 	}

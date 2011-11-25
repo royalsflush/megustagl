@@ -9,20 +9,4 @@ What do I have to do:
  - Render a cube, using a light source and materials
 (really, it's that simple)
 
-Yellow-brick road for that:
-- Projection transform
-- Rasterization
-
-What's ready:
-- the wrapper to glut
-- lighting!
-- primitives: triangle and cube
-- Inverse of the matrix
-
-What would look great:
-- vector template! \o/
-- rotations, translations and scaling
-- Put arcball code (aweeeesome!)
-
-What's not tested:
-- Lots of lights
+MISSION ACCOMPLISHED!

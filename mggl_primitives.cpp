@@ -24,7 +24,7 @@ void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
 	p2 = mggl_projectionTransform(e2);
 	p3 = mggl_projectionTransform(e3);
 
-	rasterTriangle(p1, p2, p3,
+	mggl_rasterTriangle(p1, p2, p3,
 			c1, c2, c3);
 }
 

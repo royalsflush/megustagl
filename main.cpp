@@ -39,6 +39,8 @@ void keyboardHandle(unsigned char k, int x,
 }
 
 void resizeHandler(int nWidth, int nHeight) {
+	mggl_setClearColor(Vector(0.4,0.4,0.4,1.0));
+
 	mggl_viewport(0,0, nWidth, nHeight);
 	mggl_matrixMode(MGGL_PROJECTION);
 	mggl_loadIdentity();
