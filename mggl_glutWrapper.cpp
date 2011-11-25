@@ -10,6 +10,7 @@
 #include "mggl_fragOps.h"
 
 static void (*drawFunc)();
+static void (*resizeFunc)(int,int);
 
 //Initialization functions
 void mggl_initLib(int argc, char ** argv) {
@@ -17,7 +18,7 @@ void mggl_initLib(int argc, char ** argv) {
 
 	//We're only using opengl to paint pixels
 	//so won't need anything else
-	glutInitDisplayMode(GLUT_DEPTH | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
 
 	//Lights start off
 	mggl_lightsOff();	
@@ -29,6 +30,20 @@ void mggl_createWindow(int winW, int winH,
 	glutInitWindowSize(winW,winH);
 	glutCreateWindow(title);
 	mggl_initBuffers(winW, winH);
+
+	glClearColor(0.0,0.0,0.0,0.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glDisable(GL_DEPTH);
+	glEnable(GL_COLOR);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0.0, winW, 0.0, winH);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();	
+	glViewport(0, 0, winW, winH);
 }
 
 //Execution loop
@@ -45,6 +60,9 @@ void mggl_getKeyboardFunc(void (*func)(unsigned char,
 void mggl_drawFunc() {
 	(*drawFunc)();
 	mggl_drawBuffers();
+
+	glFlush();
+	glutSwapBuffers();
 }
 
 //Getters for my lib
@@ -53,6 +71,18 @@ void mggl_getDrawFunc(void (*func)()) {
 	glutDisplayFunc(mggl_drawFunc);
 }
 
+void mggl_resize(int nW, int nH) {
+	(*resizeFunc)(nW,nH);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0.0,nW,0.0,nH);
+
+	glMatrixMode(GL_MODELVIEW);	
+	glViewport(0,0,nW,nH);
+}
+
 void mggl_resizeFunc(void (*func)(int, int)) {
-	glutReshapeFunc(func);
+	resizeFunc=func;
+	glutReshapeFunc(mggl_resize);
 }

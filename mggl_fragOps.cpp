@@ -27,16 +27,22 @@ float* depthBuffer;
 void mggl_drawBuffers() {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glBegin(GL_POINTS);
+	printf("%d, %d\n", width, height);
+
+	for (int i=0; i<width/2; i++)
+		for (int j=0; j<height/2; j++)
+			colorBuffer[i*height+j]=Vector(1.0,0.0,0.0);
+
 
 	for (int i=0; i<width; i++)
 		for (int j=0; j<height; j++) {
 			Vector c = colorBuffer[i*height+j];
 			glColor3f(c.x, c.y, c.z);
-			glVertex2i(i,j);
+	
+			glBegin(GL_POINTS);
+				glVertex2i(i,j);
+			glEnd();
 		}
-
-	glEnd();
 }
 
 //Clears both depth and color buffer
@@ -74,7 +80,7 @@ float getDepth(int x, int y) {
 
 //Set depth of pixel x,y
 void setDepth(int x, int y, float z) {
-	depthBuffer[x*width+y]=z;
+	depthBuffer[x*height+y]=z;
 }
 
 //build triangle
