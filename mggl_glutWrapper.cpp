@@ -59,7 +59,7 @@ void mggl_getKeyboardFunc(void (*func)(unsigned char,
 }	
 
 void mggl_drawFunc() {
-//	(*drawFunc)();
+	(*drawFunc)();
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	mggl_drawBuffers();
@@ -75,7 +75,7 @@ void mggl_getDrawFunc(void (*func)()) {
 }
 
 void mggl_resize(int nW, int nH) {
-//	(*resizeFunc)(nW,nH);
+	(*resizeFunc)(nW,nH);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
