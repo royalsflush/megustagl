@@ -1,10 +1,3 @@
-#ifdef __APPLE__
-	#include <OpenGL/OpenGL.h>
-	#include <GLUT/glut.h>
-#else
-	#include <glut.h>
-#endif
-
 #include "vector.h"
 #include "mggl_light.h"
 #include "mggl_transforms.h"

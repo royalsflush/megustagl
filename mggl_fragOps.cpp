@@ -25,10 +25,6 @@ float* depthBuffer;
 
 //Draws buffer on the screen
 void mggl_drawBuffers() {
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	printf("%d, %d\n", width, height);
-
 	for (int i=0; i<width/2; i++)
 		for (int j=0; j<height/2; j++)
 			colorBuffer[i*height+j]=Vector(1.0,0.0,0.0);

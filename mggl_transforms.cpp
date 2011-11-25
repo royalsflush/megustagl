@@ -5,13 +5,6 @@
 #include "vector.h"
 #include "mggl_transforms.h"
 
-#ifdef __APPLE__
-	#include <OpenGL/OpenGL.h>
-	#include <GLUT/glut.h>
-#else
-	#include <glut.h>
-#endif
-
 static Matrix<float> projection;
 static Matrix<float> invProj;
 static Matrix<float> modelview;
@@ -33,12 +26,10 @@ void mggl_matrixMode(mggl_matrixModeEnum matType) {
 	if (matType==MGGL_PROJECTION) {
 		currMatrix = &projection;
 		currInv = &invProj;
-		glMatrixMode(GL_PROJECTION);
 	}
 	else {
 		currMatrix = &modelview;
 		currInv = &invMV;
-		glMatrixMode(GL_MODELVIEW);
 	}
 }
 
@@ -77,9 +68,6 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 	Matrix<float> tmp = matR*matT;
 	*currInv = tmp; currInv->invert();
 	tmp.t();
-
-	glLoadIdentity();
-	glMultMatrixf(tmp);
 }
 
 void mggl_frustum(float left, float right, float bottom,
@@ -113,9 +101,6 @@ void mggl_perspective(float fovy, float aspect, float znear, float zfar) {
 	*currMatrix = matP;
 	Matrix<float> tmp = matP;
 	tmp.t();
-
-	glLoadIdentity();
-	glMultMatrixf(tmp);
 }
 
 void mggl_viewport(int left, int bottom, int width, int height) {

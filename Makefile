@@ -23,6 +23,9 @@ demo: $(OBJS)
 cube:
 	$(CC) $(CFLAGS) $(LIBS) simplecube.cpp -o cube
 
+test:
+	$(CC) $(CFLAGS) $(LIBS) vector.cpp glTest.cpp -o glTest
+
 cleanCube:
 	rm cube
 

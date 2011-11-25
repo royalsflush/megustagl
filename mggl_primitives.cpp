@@ -1,10 +1,3 @@
-#ifdef __APPLE__
-	#include <OpenGL/OpenGL.h>
-	#include <GLUT/glut.h>
-#else
-	#include <glut.h>
-#endif
-
 #include "vector.h"
 #include "mggl_vertexOps.h"
 #include "mggl_fragOps.h"
@@ -18,11 +11,9 @@ void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
 	Vector c1,c2,c3;
 	Vector p1,p2,p3;
 
-	glBegin(GL_TRIANGLES);
-		c1=mggl_processVertex(v1,n);
-		c2=mggl_processVertex(v2,n);
-		c3=mggl_processVertex(v3,n);
-	glEnd();
+	c1=mggl_processVertex(v1,n);
+	c2=mggl_processVertex(v2,n);
+	c3=mggl_processVertex(v3,n);
 
 	Vector e1, e2, e3;
 	e1 = mggl_modelViewTransform(v1);
@@ -37,15 +28,13 @@ void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
 			c1, c2, c3);
 }
 
-//Triangle with given normals
+//Triangle with given normals (DOES NOT WORK)
 void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3,
 		const Vector& n1, const Vector& n2, const Vector& n3) {
 	
-	glBegin(GL_TRIANGLES);
-		mggl_processVertex(v1,n1);
-		mggl_processVertex(v2,n2);
-		mggl_processVertex(v3,n3);
-	glEnd();
+	mggl_processVertex(v1,n1);
+	mggl_processVertex(v2,n2);
+	mggl_processVertex(v3,n3);
 
 }
 
