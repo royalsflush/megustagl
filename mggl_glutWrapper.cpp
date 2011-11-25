@@ -9,6 +9,8 @@
 #include "mggl_light.h"
 #include "mggl_fragOps.h"
 
+static void (*drawFunc)();
+
 //Initialization functions
 void mggl_initLib(int argc, char ** argv) {
 	glutInit(&argc,argv);
@@ -40,10 +42,15 @@ void mggl_getKeyboardFunc(void (*func)(unsigned char,
 	glutKeyboardFunc(func);
 }	
 
+void mggl_drawFunc() {
+	(*drawFunc)();
+	mggl_drawBuffers();
+}
+
 //Getters for my lib
 void mggl_getDrawFunc(void (*func)()) {
-	//(*func)();
-	glutDisplayFunc(mggl_drawBuffers);
+	drawFunc=func;
+	glutDisplayFunc(mggl_drawFunc);
 }
 
 void mggl_resizeFunc(void (*func)(int, int)) {
