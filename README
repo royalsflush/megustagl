@@ -18,10 +18,10 @@ and treatment for those nasty assert cases
 
 Yellow-brick road:
  - Enable functions to set/get render mode (DONE!)
- - Create raytracing class
- - Init raytracing with the engine
- - Set up camera in transform functions
- - Triangle class
+ - Create raytracing class (DONE!)
+ - Init raytracing with the engine (DONE!)
+ - Set up camera in transform functions (DONE!) 
+ - Triangle class (DONE!)
  - Create list of triangles for rendering
  - Set up the ray class
  - Modify render function so it works with

@@ -10,17 +10,15 @@ using namespace std;
 struct Triangle;
 
 struct Raytracer {
-	double fovy, asp;
-	double znear, zfar;
-	Vector eye, up, center;
+	Vector eye;
+	Vector xe, ye, ze;
+	double znear;
 
 	//Viewport
-	double bot, left, 
-		width, height;
+	double width, height;
 
 	//Cached
 	double a, b;
-	Vector xe, ye, ze;
 
 	//For the rendering
 	Vector bgVec;
@@ -31,6 +29,9 @@ struct Raytracer {
 	Vector getColor(double px, double py);
 	void setBackground(float pr, float pg, float pg, 
 		float pa); 
+	void renderToBuffer();
 };
+
+Raytracer& mggl_getRaytracer();
 
 #endif // MGGL_RAYTRACER_H

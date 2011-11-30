@@ -9,9 +9,11 @@ using namespace std;
 #include "mggl_light.h"
 #include "mggl_triangle.h"
 #include "mggl_raytracer.h"
+#include "mggl_fragOps.h"
 
 const int negInf = 0xc0c0c0c0;
 const int inf = 0x3f3f3f3f;
+static Raytracer globalTracer;
 
 Vector Raytracer::getColor(double px, double py) {
 	Vector o, d;
@@ -69,4 +71,17 @@ Vector Raytracer::getPixelColor(int px, int py) {
 
 void Raytracer::setBackground(float pr, float pg, float pb, float pa) {
 	bgVec = Vector(pr,pg,pb,pa);
+}
+
+void Raytracer::renderToBuffer() {
+	mggl_clearBuffers();
+
+	for (int i=0; i<this->width; i++) {
+		for (int j=0; j<this->height; j++)
+			mggl_setColor(i,j,this->getPixelColor(i,j));
+	}
+}
+
+Raytracer& mggl_getRaytracer() {
+	return globalTracer;
 }

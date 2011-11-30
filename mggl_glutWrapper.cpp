@@ -8,6 +8,8 @@
 
 #include "mggl_light.h"
 #include "mggl_fragOps.h"
+#include "mggl_raytracer.h"
+#include "mggl_renderMode.h"
 
 static void (*drawFunc)();
 static void (*resizeFunc)(int,int);
@@ -60,6 +62,9 @@ void mggl_getKeyboardFunc(void (*func)(unsigned char,
 
 void mggl_drawFunc() {
 	(*drawFunc)();
+
+	if (mggl_getRenderMode()==MGGL_RAYTRACING)
+		mggl_getRaytracer().renderToBuffer();
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	mggl_drawBuffers();

@@ -13,7 +13,7 @@ void mggl_clearBuffers();
 void mggl_initBuffers(int wid, int hei);
 
 //Set color to pixel x,y
-void mggl_setColor(int x, int y, Vector& color);
+void mggl_setColor(int x, int y, const Vector& color);
 
 //Get depth of pixel x,y
 float mggl_getDepth(int x, int y);

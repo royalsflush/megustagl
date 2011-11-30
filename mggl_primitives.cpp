@@ -6,7 +6,7 @@
 
 //Triangle that uses plane normal ((v3-v2)X(v1-v2))
 void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
-	if (getRenderMode()==MGGL_OPENGL_STYLE) {
+	if (mggl_getRenderMode()==MGGL_OPENGL_STYLE) {
 		Vector n = (v3-v2).cross(v1-v2);
 		n.w=0; n.normalize();
 

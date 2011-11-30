@@ -4,6 +4,7 @@
 #include "matrix.h"
 #include "vector.h"
 #include "mggl_transforms.h"
+#include "mggl_raytracer.h"
 
 static Matrix<float> projection;
 static Matrix<float> invProj;
@@ -42,11 +43,12 @@ void mggl_loadIdentity() {
 void mggl_lookAt(const Vector& eye, const Vector& center, 
 		const Vector& up) {
 	Matrix<float> matR, matT;
-	eyePos=eye;
+	mggl_getRaytracer().eye = eyePos=eye;
 
-	Vector ze = center-eye;	ze.w=0;
-	Vector xe = ze.cross(up); xe.w=0;
-	Vector ye = xe.cross(ze); ye.w=0;
+	Vector xe, ye, ze;
+	mggl_getRaytracer().ze = ze = center-eye; ze.w=0;
+	mggl_getRaytracer().xe = xe = ze.cross(up); xe.w=0;
+	mggl_getRaytracer().ye = ye = xe.cross(ze); ye.w=0;
 	
 	xe.normalize();
 	ye.normalize();
@@ -92,6 +94,10 @@ void mggl_perspective(float fovy, float aspect, float znear, float zfar) {
 	float t = n*tan(toRad(fovy/2.0)), b=-t;
 	float r=((t-b)*aspect)/2.0, l=-r;
 
+	mggl_getRaytracer().a = 2*t;
+	mggl_getRaytracer().b = 2*r;
+	mggl_getRaytracer().znear = znear;
+
 	matP.set(4,4,
 		(2*n)/(r-l),         0.0f,  (r+l)/(r-l),           0.0f,
 		        0.0f, (2*n)/(t-b),  (t+b)/(t-b),           0.0f,
@@ -105,6 +111,8 @@ void mggl_perspective(float fovy, float aspect, float znear, float zfar) {
 
 void mggl_viewport(int left, int bottom, int width, int height) {
 	viewport = Vector(left, bottom, width, height);
+	mggl_getRaytracer().width = width;
+	mggl_getRaytracer().height = height;
 }
 
 Vector& mggl_getEyePos() {

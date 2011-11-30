@@ -60,7 +60,7 @@ void mggl_initBuffers(int wid, int hei) {
 
 
 //Set color to pixel x,y
-void mggl_setColor(int x, int y, Vector& color) {
+void mggl_setColor(int x, int y, const Vector& color) {
 	colorBuffer[x*height+y]=color;
 }
 
