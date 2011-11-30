@@ -25,6 +25,7 @@ struct Raytracer {
 	vector<Triangle*> objs;
 	int raysPP, depth; 
 
+	Raytracer();
 	Vector getPixelColor(int px, int py);
 	Vector getColor(double px, double py);
 	void setBackground(float pr, float pg, float pg, 

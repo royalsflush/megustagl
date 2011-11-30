@@ -15,12 +15,17 @@ const int negInf = 0xc0c0c0c0;
 const int inf = 0x3f3f3f3f;
 static Raytracer globalTracer;
 
+Raytracer::Raytracer() {
+	this->raysPP = 1;
+	this->depth = 1;
+}
+
 Vector Raytracer::getColor(double px, double py) {
 	Vector o=eye;
 	Vector d=this->ze*(-this->znear) + this->ye*(a*((py/this->height)-0.5))+
 		this->xe*(b*((px/this->width)-0.5));
 
-	Ray r(o,d); //calcRay
+	Ray r(o,d);
 	Triangle* obj=NULL;
 	int minZ=inf; 
 
