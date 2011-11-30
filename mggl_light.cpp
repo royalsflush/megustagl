@@ -70,3 +70,52 @@ void mggl_lightsOff() {
 	for (int i=0; i<VLIGHTS_TAM; i++)
 		lightsVec[i].on=false;
 }
+
+Vector mggl_calcContribForRaytracing(int idx, const Vector& v, const Vector& n,
+		const Vector& eye) {
+	Vector color(0.0, 0.0, 0.0, 0.0);
+	if (lightsVec[idx].on==false) return color;
+
+	Vector ldif, lspec, lamb, lpos;
+	Vector mdif, mspec, mamb;
+
+	mdif = mggl_getMaterial()->diffuse;
+	mspec = mggl_getMaterial()->specular;
+	mamb = mggl_getMaterial()->ambient;
+	float shi = mggl_getMaterial()->shininess;
+
+	ldif = lightsVec[idx].diffuse;
+	lamb = lightsVec[idx].ambient;
+	lpos = lightsVec[idx].position;
+	lspec = lightsVec[idx].specular;		
+
+	Vector l = lpos-v; l.w=0;
+	l.normalize();
+
+	Vector obs = v*(-1); obs.w=0;
+	obs.normalize();		
+
+	Vector h = l+obs; h.w=0;
+	h.normalize();
+
+	color.x+=(lamb.x)*(mamb.x);
+	color.y+=(lamb.y)*(mamb.y);
+	color.z+=(lamb.z)*(mamb.z);
+
+	if (l*n>0) {
+		//Diffuse
+		color.x+=(ldif.x)*(l*n)*(mdif.x);
+		color.y+=(ldif.y)*(l*n)*(mdif.y);
+		color.z+=(ldif.z)*(l*n)*(mdif.z);
+
+		//Specular
+		double coef = pow(max(h*n,0), shi);
+		color.x+=(lspec.x)*(mspec.x)*coef;
+		color.y+=(lspec.y)*(mspec.y)*coef;
+		color.z+=(lspec.z)*(mspec.z)*coef;
+	}
+}
+
+int mggl_getLightVecSize() {
+	return VLIGHTS_TAM;
+}

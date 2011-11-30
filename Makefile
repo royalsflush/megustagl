@@ -6,7 +6,8 @@ OUT = megusta
 SRCS = main.cpp mggl_glutWrapper.cpp mggl_transforms.cpp \
 	matrix.cpp vector.cpp mggl_primitives.cpp mggl_vertexOps.cpp \
 	mggl_light.cpp mggl_material.cpp mggl_fragOps.cpp \
-	mggl_renderMode.cpp
+	mggl_renderMode.cpp mggl_raytracer.cpp mggl_triangle.cpp \
+	mggl_ray.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 ifeq ($(shell uname), Darwin)
@@ -113,3 +114,22 @@ mggl_fragOps.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
 mggl_fragOps.o: /usr/include/i386/_types.h /usr/include/secure/_stdio.h
 mggl_fragOps.o: /usr/include/secure/_common.h vector.h mggl_fragOps.h
 mggl_fragOps.o: mggl_vertexOps.h
+mggl_renderMode.o: mggl_renderMode.h
+mggl_raytracer.o: /usr/include/math.h /usr/include/architecture/i386/math.h
+mggl_raytracer.o: /usr/include/sys/cdefs.h /usr/include/stdlib.h
+mggl_raytracer.o: /usr/include/Availability.h
+mggl_raytracer.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+mggl_raytracer.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+mggl_raytracer.o: /usr/include/i386/_types.h /usr/include/sys/wait.h
+mggl_raytracer.o: /usr/include/sys/signal.h /usr/include/sys/appleapiopts.h
+mggl_raytracer.o: /usr/include/machine/signal.h /usr/include/i386/signal.h
+mggl_raytracer.o: /usr/include/i386/_structs.h /usr/include/sys/_structs.h
+mggl_raytracer.o: /usr/include/machine/_structs.h /usr/include/sys/resource.h
+mggl_raytracer.o: /usr/include/machine/endian.h /usr/include/i386/endian.h
+mggl_raytracer.o: /usr/include/sys/_endian.h
+mggl_raytracer.o: /usr/include/libkern/_OSByteOrder.h
+mggl_raytracer.o: /usr/include/libkern/i386/_OSByteOrder.h
+mggl_raytracer.o: /usr/include/alloca.h /usr/include/machine/types.h
+mggl_raytracer.o: /usr/include/i386/types.h vector.h mggl_ray.h mggl_light.h
+mggl_raytracer.o: mggl_triangle.h mggl_material.h mggl_raytracer.h
+mggl_ray.o: vector.h

@@ -16,5 +16,8 @@ struct Light {
 Vector mggl_calcColor(const Vector& v, const Vector& n);
 Light* mggl_getLight(int idx);
 void mggl_lightsOff();
+Vector mggl_calcContribForRaytracing(int idx, const Vector& v, const Vector& n,
+		const Vector& eye);
+int mggl_getLightVecSize();
 
 #endif // MGGL_LIGHT_H
