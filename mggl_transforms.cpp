@@ -45,14 +45,17 @@ void mggl_lookAt(const Vector& eye, const Vector& center,
 	Matrix<float> matR, matT;
 	mggl_getRaytracer().eye = eyePos=eye;
 
-	Vector xe, ye, ze;
-	mggl_getRaytracer().ze = ze = center-eye; ze.w=0;
-	mggl_getRaytracer().xe = xe = ze.cross(up); xe.w=0;
-	mggl_getRaytracer().ye = ye = xe.cross(ze); ye.w=0;
+	Vector ze = center-eye; ze.w=0;
+	Vector xe = ze.cross(up); xe.w=0;
+	Vector ye = xe.cross(ze); ye.w=0;
 	
 	xe.normalize();
 	ye.normalize();
 	ze.normalize();
+
+	mggl_getRaytracer().xe = xe;
+	mggl_getRaytracer().ye = ye;
+	mggl_getRaytracer().ze = ze;
 
 	matR.set(4,4,
 		 xe.x,  xe.y,  xe.z, 0.0f,

@@ -55,7 +55,7 @@ main.o: /usr/include/libkern/i386/_OSByteOrder.h /usr/include/alloca.h
 main.o: /usr/include/machine/types.h /usr/include/i386/types.h meGustaGL.h
 main.o: vector.h mggl_glutWrapper.h mggl_transforms.h matrix.h
 main.o: /usr/include/stdarg.h /usr/include/assert.h mggl_primitives.h
-main.o: mggl_light.h mggl_material.h mggl_fragOps.h
+main.o: mggl_light.h mggl_material.h mggl_fragOps.h mggl_renderMode.h
 mggl_glutWrapper.o: /usr/include/stdlib.h /usr/include/Availability.h
 mggl_glutWrapper.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
 mggl_glutWrapper.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
@@ -71,14 +71,14 @@ mggl_glutWrapper.o: /usr/include/libkern/_OSByteOrder.h
 mggl_glutWrapper.o: /usr/include/libkern/i386/_OSByteOrder.h
 mggl_glutWrapper.o: /usr/include/alloca.h /usr/include/machine/types.h
 mggl_glutWrapper.o: /usr/include/i386/types.h mggl_light.h vector.h
-mggl_glutWrapper.o: mggl_fragOps.h
+mggl_glutWrapper.o: mggl_fragOps.h mggl_raytracer.h mggl_renderMode.h
 mggl_transforms.o: /usr/include/math.h /usr/include/architecture/i386/math.h
 mggl_transforms.o: /usr/include/sys/cdefs.h /usr/include/assert.h matrix.h
 mggl_transforms.o: /usr/include/stdarg.h /usr/include/stdio.h
 mggl_transforms.o: /usr/include/_types.h /usr/include/sys/_types.h
 mggl_transforms.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
 mggl_transforms.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
-mggl_transforms.o: vector.h mggl_transforms.h
+mggl_transforms.o: vector.h mggl_transforms.h mggl_raytracer.h mggl_light.h
 matrix.o: /usr/include/assert.h /usr/include/sys/cdefs.h
 matrix.o: /usr/include/stdarg.h matrix.h /usr/include/stdio.h
 matrix.o: /usr/include/_types.h /usr/include/sys/_types.h
@@ -90,7 +90,8 @@ vector.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
 vector.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
 vector.o: /usr/include/math.h /usr/include/architecture/i386/math.h vector.h
 mggl_primitives.o: vector.h mggl_vertexOps.h mggl_fragOps.h mggl_primitives.h
-mggl_primitives.o: mggl_renderMode.h
+mggl_primitives.o: mggl_renderMode.h mggl_raytracer.h mggl_light.h
+mggl_primitives.o: mggl_material.h mggl_triangle.h
 mggl_vertexOps.o: vector.h mggl_light.h mggl_transforms.h matrix.h
 mggl_vertexOps.o: /usr/include/stdarg.h /usr/include/assert.h
 mggl_vertexOps.o: /usr/include/sys/cdefs.h /usr/include/stdio.h
@@ -132,4 +133,22 @@ mggl_raytracer.o: /usr/include/libkern/i386/_OSByteOrder.h
 mggl_raytracer.o: /usr/include/alloca.h /usr/include/machine/types.h
 mggl_raytracer.o: /usr/include/i386/types.h vector.h mggl_ray.h mggl_light.h
 mggl_raytracer.o: mggl_triangle.h mggl_material.h mggl_raytracer.h
-mggl_ray.o: vector.h
+mggl_raytracer.o: mggl_fragOps.h
+mggl_triangle.o: /usr/include/math.h /usr/include/architecture/i386/math.h
+mggl_triangle.o: /usr/include/sys/cdefs.h /usr/include/stdlib.h
+mggl_triangle.o: /usr/include/Availability.h
+mggl_triangle.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+mggl_triangle.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+mggl_triangle.o: /usr/include/i386/_types.h /usr/include/sys/wait.h
+mggl_triangle.o: /usr/include/sys/signal.h /usr/include/sys/appleapiopts.h
+mggl_triangle.o: /usr/include/machine/signal.h /usr/include/i386/signal.h
+mggl_triangle.o: /usr/include/i386/_structs.h /usr/include/sys/_structs.h
+mggl_triangle.o: /usr/include/machine/_structs.h /usr/include/sys/resource.h
+mggl_triangle.o: /usr/include/machine/endian.h /usr/include/i386/endian.h
+mggl_triangle.o: /usr/include/sys/_endian.h
+mggl_triangle.o: /usr/include/libkern/_OSByteOrder.h
+mggl_triangle.o: /usr/include/libkern/i386/_OSByteOrder.h
+mggl_triangle.o: /usr/include/alloca.h /usr/include/machine/types.h
+mggl_triangle.o: /usr/include/i386/types.h mggl_triangle.h vector.h
+mggl_triangle.o: mggl_material.h mggl_ray.h
+mggl_ray.o: vector.h mggl_ray.h

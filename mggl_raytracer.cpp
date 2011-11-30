@@ -16,7 +16,9 @@ const int inf = 0x3f3f3f3f;
 static Raytracer globalTracer;
 
 Vector Raytracer::getColor(double px, double py) {
-	Vector o, d;
+	Vector o=eye;
+	Vector d=this->ze*(-this->znear) + this->ye*(a*((py/this->height)-0.5))+
+		this->xe*(b*((px/this->width)-0.5));
 
 	Ray r(o,d); //calcRay
 	Triangle* obj=NULL;
