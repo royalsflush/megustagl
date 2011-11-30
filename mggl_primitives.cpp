@@ -3,6 +3,9 @@
 #include "mggl_fragOps.h"
 #include "mggl_primitives.h"
 #include "mggl_renderMode.h"
+#include "mggl_raytracer.h"
+#include "mggl_material.h"
+#include "mggl_triangle.h"
 
 //Triangle that uses plane normal ((v3-v2)X(v1-v2))
 void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
@@ -29,6 +32,8 @@ void mggl_triangle(const Vector& v1, const Vector& v2, const Vector& v3) {
 		mggl_rasterTriangle(p1, p2, p3,
 				c1, c2, c3);
 	}
+	else mggl_getRaytracer().objs.push_back(
+		new Triangle(*mggl_getMaterial(), v1, v2, v3));
 }
 
 //Triangle with given normals (DOES NOT WORK)

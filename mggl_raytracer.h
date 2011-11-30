@@ -30,6 +30,7 @@ struct Raytracer {
 	void setBackground(float pr, float pg, float pg, 
 		float pa); 
 	void renderToBuffer();
+	void clearTriangleList();
 };
 
 Raytracer& mggl_getRaytracer();

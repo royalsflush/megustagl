@@ -61,6 +61,9 @@ void mggl_getKeyboardFunc(void (*func)(unsigned char,
 }	
 
 void mggl_drawFunc() {
+	if (mggl_getRenderMode()==MGGL_RAYTRACING)
+		mggl_getRaytracer().clearTriangleList();	
+
 	(*drawFunc)();
 
 	if (mggl_getRenderMode()==MGGL_RAYTRACING)

@@ -82,6 +82,13 @@ void Raytracer::renderToBuffer() {
 	}
 }
 
+void Raytracer::clearTriangleList() {
+	for (int i=0; i<(int) objs.size(); i++)
+		delete objs[i];
+
+	objs.clear();
+}
+
 Raytracer& mggl_getRaytracer() {
 	return globalTracer;
 }
