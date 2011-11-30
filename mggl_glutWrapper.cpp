@@ -13,6 +13,12 @@
 
 static void (*drawFunc)();
 static void (*resizeFunc)(int,int);
+static void (*keyboardFunc)(unsigned char, int, int);
+
+//Local functions 
+void mggl_drawFunc();
+void mggl_keyboardFunc(unsigned char k, int x, int y);
+void mggl_resizeFunc(int width, int height);
 
 //Initialization functions
 void mggl_initLib(int argc, char ** argv) {
@@ -55,9 +61,15 @@ void mggl_run() {
 }
 
 //Getter for GLUT
+void mggl_keyboardFunc(unsigned char k, int x, int y) {
+	(*keyboardFunc)(k,x,y);
+	mggl_drawFunc();
+}
+
 void mggl_getKeyboardFunc(void (*func)(unsigned char,
 			int,int)) {
-	glutKeyboardFunc(func);
+	keyboardFunc=func;
+	glutKeyboardFunc(mggl_keyboardFunc);
 }	
 
 void mggl_drawFunc() {

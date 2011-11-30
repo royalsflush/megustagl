@@ -35,6 +35,13 @@ void keyboardHandle(unsigned char k, int x,
 	switch (k) {
 		case 'q':
 			exit(0);
+			break;
+		case 'r':
+			mggl_setRenderMode(MGGL_RAYTRACING);
+			break;
+		case 'g':
+			mggl_setRenderMode(MGGL_OPENGL_STYLE);
+			break;
 	}
 }
 

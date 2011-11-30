@@ -24,6 +24,10 @@
 
 //Fragments
 #include "mggl_fragOps.h"
+
+//Render mode handling
+#include "mggl_renderMode.h"
+
 /*
 //Simplified vertex
 void mggl_triangle(Vector& v1, Vector& v2, Vector& v3);

@@ -22,8 +22,8 @@ Yellow-brick road:
  - Init raytracing with the engine (DONE!)
  - Set up camera in transform functions (DONE!) 
  - Triangle class (DONE!)
- - Create list of triangles for rendering
- - Set up the ray class
+ - Create list of triangles for rendering (DONE!)
+ - Set up the ray class (DONE!)
  - Modify render function so it works with
 	raytracing
  - Test change of modes
