@@ -78,7 +78,7 @@ void mggl_drawFunc() {
 
 	(*drawFunc)();
 
-	if (mggl_getRenderMode()==MGGL_RAYTRACING)
+	if (mggl_getRenderMode()==MGGL_RAYTRACING) 
 		mggl_getRaytracer().renderToBuffer();
 
 	glClear(GL_COLOR_BUFFER_BIT);

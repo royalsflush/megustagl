@@ -11,5 +11,6 @@ struct Material {
 };
 
 Material* mggl_getMaterial();
+void mggl_setMaterial(const Material& pmat);
 
 #endif // MGGL_MATERIAL_H

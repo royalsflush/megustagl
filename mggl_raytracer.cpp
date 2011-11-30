@@ -47,6 +47,7 @@ Vector Raytracer::getColor(double px, double py) {
 	Vector color(0.0,0.0,0.0,0.0);
 	Vector pt = obj->getIntersectionPoint(r);
 	Vector n = obj->getNormalAtPoint(pt);
+	mggl_setMaterial(obj->m);	
 
 	for (int i=0; i<mggl_getLightVecSize(); i++) { 
 		//Check if light is actually hitting is object
@@ -85,7 +86,7 @@ void Raytracer::renderToBuffer() {
 
 	for (int i=0; i<this->width; i++) {
 		for (int j=0; j<this->height; j++)
-			mggl_setColor(i,j,this->getPixelColor(i,j));
+			mggl_setColor(i,this->height-j,this->getPixelColor(i,j));
 	}
 }
 
