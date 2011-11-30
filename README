@@ -10,3 +10,24 @@ What do I have to do:
 (really, it's that simple)
 
 MISSION ACCOMPLISHED!
+
+So, MeGusta 2.0:
+Rendering can be done with OpenGL like engine or
+with raytracing. Besides, it includes clipping support
+and treatment for those nasty assert cases
+
+Yellow-brick road:
+ - Enable functions to set/get render mode (DONE!)
+ - Create raytracing class
+ - Init raytracing with the engine
+ - Set up camera in transform functions
+ - Triangle class
+ - Create list of triangles for rendering
+ - Set up the ray class
+ - Modify render function so it works with
+	raytracing
+ - Test change of modes
+ - Implement antialiasing
+ - Implement reflection (in material)
+ - Implement refraction (in material)
+ - Implement shadows
