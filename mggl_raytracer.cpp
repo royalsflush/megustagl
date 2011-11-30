@@ -55,7 +55,7 @@ Vector Raytracer::getColor(double px, double py) {
 		Ray ol(l, pt-l);
 
 //		if (root->checkIntersection(ol)==obj)
-			color+=mggl_calcContribForRaytracing(i,pt,n,eye);
+			color+=mggl_calcContribForRaytracing(i,pt,n,this->eye);
 	}
 
 	return color;

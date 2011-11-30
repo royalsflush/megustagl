@@ -15,6 +15,7 @@ using namespace std;
 #include "vector.h"
 #include "mggl_fragOps.h"
 #include "mggl_vertexOps.h"
+#include "mggl_raytracer.h"
 
 static int width;
 static int height;
@@ -76,6 +77,7 @@ void mggl_setDepth(int x, int y, float z) {
 
 void mggl_setClearColor(const Vector& c) {
 	clearColor=c;
+	mggl_getRaytracer().bgVec=c;
 }
 
 //build triangle
